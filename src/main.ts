@@ -1,9 +1,13 @@
 const core = require('@actions/core');
 const exec = require('@actions/exec');
 const tc = require('@actions/tool-cache');
+const io = require('@actions/io');
 
 async function run() {
     const os = core.getInput('os', {required: true});
+
+    // Otherwise conda can't install for some reason
+    await io.mkdirP('/home/runner/.conda');
 
     // This should all be cached!
     //if(process.platform == "linux") {
