@@ -8,9 +8,9 @@ async function run() {
     // This should all be cached!
     //if(process.platform == "linux") {
     if(os == "linux") {
-        const URL = "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh";
+        var URL = "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh";
     } else {
-        const URL = "https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh";
+        var URL = "https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh";
     }
     const installerLocation = await tc.downloadTool(URL);
 
