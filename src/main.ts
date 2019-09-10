@@ -5,9 +5,10 @@ const io = require('@actions/io');
 
 async function run() {
     const os = core.getInput('os', {required: true});
+    var home = "/home/runner";
 
     // Otherwise conda can't install for some reason
-    await io.mkdirP('/home/runner/.conda');
+    await io.mkdirP(home.concat('/.conda'));
 
     // This should all be cached!
     //if(process.platform == "linux") {
@@ -18,19 +19,19 @@ async function run() {
     }
     const installerLocation = await tc.downloadTool(URL);
 
-    await exec.exec("bash", [installerLocation, "-b", "-p", "$HOME/miniconda"]);
+    await exec.exec("bash", [installerLocation, "-b", "-p", home.concat("/miniconda")]);
 
-    //core.addPath("$HOME/miniconda/bin")
+    //core.addPath(home.concat("/miniconda/bin"))
 
-    await exec.exec("$HOME/miniconda/bin/conda", ["config", "--set", "always_yes", "yes"]);
+    await exec.exec(home.concat("/miniconda/bin/conda"), ["config", "--set", "always_yes", "yes"]);
 
     // Strictly speaking, only the galaxy tests need planemo and samtools
-    await exec.exec("$HOME/miniconda/bin/conda", ["create", "-n", "foo", "-q", "--yes", "-c", "conda-forge", "-c", "bioconda", "python=3.7", "numpy", "scipy", "matplotlib==3.1.1", "nose", "flake8", "plotly", "pysam", "pyBigWig", "py2bit", "deeptoolsintervals", "planemo", "samtools"]);
+    await exec.exec(home.concat("/miniconda/bin/conda"), ["create", "-n", "foo", "-q", "--yes", "-c", "conda-forge", "-c", "bioconda", "python=3.7", "numpy", "scipy", "matplotlib==3.1.1", "nose", "flake8", "plotly", "pysam", "pyBigWig", "py2bit", "deeptoolsintervals", "planemo", "samtools"]);
 
     // Caching should end here
 
     // Install deepTools
-    await exec.exec("$HOME/miniconda/envs/foo/bin/python", ["-m", "pip", "install", ".", "--no-deps", "--ignore-installed", "-vv"])
+    await exec.exec(home.concat("/miniconda/envs/foo/bin/python"), ["-m", "pip", "install", ".", "--no-deps", "--ignore-installed", "-vv"])
 }
 
 run();
