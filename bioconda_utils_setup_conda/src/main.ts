@@ -5,7 +5,7 @@ const io = require('@actions/io');
 const fs = require('fs');
 
 function parseCommonSh(fname) {
-    var lines = fs.readFileSync(fname).split("\r?\n");
+    var lines = fs.readFileSync(fname, "UTF-8").split(/\r?\n/);
     console.log(lines);
 
     var h = {};
