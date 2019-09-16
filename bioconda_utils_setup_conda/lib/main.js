@@ -14,14 +14,14 @@ const io = require('@actions/io');
 const fs = require('fs');
 function parseCommonSh(fname) {
     var lines = fs.readFileSync(fname, "UTF-8").split(/\r?\n/);
-    console.log(lines);
     var h = {};
     for (var i = 0; i < lines.length; i++) {
         var cols = lines[i].split("=");
-        console.log(cols);
-        h[cols[0]] = cols[1];
+        if (cols.length == 2)
+            h[cols[0]] = cols[1];
     }
     ;
+    return h;
 }
 // This should all be cached!
 function run() {
