@@ -2,17 +2,20 @@ const core = require('@actions/core');
 const exec = require('@actions/exec');
 const tc = require('@actions/tool-cache');
 const io = require('@actions/io');
+const readline = require('readline');
+const fs = require('fs');
 
 function parseCommonSh(fname) {
-    var reader = new FileReader();
-    var lines = reader.readAsText.split('\n');
+    let rl = readline.createInterface({
+        input: fs.createReadStream(fname)
+    });
+
     var h = {};
-    for(var i = 0; i < lines.length; i++){
-        cols = lines[i].split("=");
+    rl.on('line', function(line, h) {
+        var cols = line.split("=");
         h[cols[0]] = cols[1];
-    }:
-  };
-};
+    });
+}
 
 
 // This should all be cached!
