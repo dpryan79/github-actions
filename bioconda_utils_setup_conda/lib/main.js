@@ -18,7 +18,7 @@ function parseCommonSh(fname) {
         input: fs.createReadStream(fname)
     });
     var h = {};
-    rl.on('line', function (line, h) {
+    rl.on('line', function (line) {
         console.log(line);
         var cols = line.split("=");
         console.log(cols);
