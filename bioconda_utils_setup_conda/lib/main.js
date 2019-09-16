@@ -19,7 +19,9 @@ function parseCommonSh(fname) {
     });
     var h = {};
     rl.on('line', function (line, h) {
+        console.log(line);
         var cols = line.split("=");
+        console.log(cols);
         h[cols[0]] = cols[1];
     });
 }
