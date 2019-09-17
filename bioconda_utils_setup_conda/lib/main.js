@@ -64,4 +64,11 @@ function run() {
         yield exec.exec(home.concat("/miniconda/bin/conda"), ["config", "--system", "--add", "channels", "file://" + home.concat("/miniconda/conda-bld")]);
     });
 }
-run();
+try {
+    run();
+}
+catch (e) {
+    console.log(e);
+    process.exit(1);
+}
+;
