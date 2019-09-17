@@ -45,6 +45,9 @@ async function run() {
     await exec.exec(home.concat("/miniconda/bin/conda"), ["config", "--system", "--add", "channels", "bioconda"]);
     await exec.exec(home.concat("/miniconda/bin/conda"), ["config", "--system", "--add", "channels", "conda-forge"]);
 
+    // DEBUG
+    await exec.exec(home.concat("/miniconda/bin/conda"), ["list"]);
+
     // Step 3: Install bioconda-utils and test requirements
     await exec.exec(home.concat("/miniconda/bin/conda"), ["install", "-y", "--file", "bioconda_utils/bioconda_utils-requirements.txt", "--file", "test-requirements.txt"]);
 

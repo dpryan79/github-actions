@@ -50,6 +50,8 @@ function run() {
         yield exec.exec(home.concat("/miniconda/bin/conda"), ["config", "--system", "--add", "channels", "defaults"]);
         yield exec.exec(home.concat("/miniconda/bin/conda"), ["config", "--system", "--add", "channels", "bioconda"]);
         yield exec.exec(home.concat("/miniconda/bin/conda"), ["config", "--system", "--add", "channels", "conda-forge"]);
+        // DEBUG
+        yield exec.exec(home.concat("/miniconda/bin/conda"), ["list"]);
         // Step 3: Install bioconda-utils and test requirements
         yield exec.exec(home.concat("/miniconda/bin/conda"), ["install", "-y", "--file", "bioconda_utils/bioconda_utils-requirements.txt", "--file", "test-requirements.txt"]);
         // step 4: cleanup
