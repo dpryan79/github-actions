@@ -27,7 +27,7 @@ function run() {
             "--no-check-pinnings",
             "--no-check-pending-deps",
             "--no-follow-graph",
-            "--exclude", "'bioconductor-*'",
+            "--exclude", "bioconductor-*",
             "--commit-as", "BiocondaBot", "47040946+BiocondaBot@users.noreply.github.com",
             process.env.AUTOBUMP_OPTS]);
     });
