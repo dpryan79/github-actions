@@ -4,7 +4,9 @@ const io = require('@actions/io');
 
 async function run() {
   await io.rmRF("bioconda-recipes");
-  await exec.exec("git", ["clone", "git@github.com:bioconda/bioconda-recipes"]);
+  // Circleci has ssh keys configured!
+  //await exec.exec("git", ["clone", "git@github.com:bioconda/bioconda-recipes"]);
+  await exec.exec("git", ["clone", "https://github.com/bioconda/bioconda-recipes"]);
   await pr.chdir("bioconda-recipes");
   await exec.exec("git", ["config", "user.name", "Autobump"]);
   await exec.exec("git", ["config", "user.email", "bioconda@users.noreply.github.com"]);

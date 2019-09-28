@@ -13,7 +13,9 @@ const io = require('@actions/io');
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         yield io.rmRF("bioconda-recipes");
-        yield exec.exec("git", ["clone", "git@github.com:bioconda/bioconda-recipes"]);
+        // Circleci has ssh keys configured!
+        //await exec.exec("git", ["clone", "git@github.com:bioconda/bioconda-recipes"]);
+        yield exec.exec("git", ["clone", "https://github.com/bioconda/bioconda-recipes"]);
         yield pr.chdir("bioconda-recipes");
         yield exec.exec("git", ["config", "user.name", "Autobump"]);
         yield exec.exec("git", ["config", "user.email", "bioconda@users.noreply.github.com"]);
